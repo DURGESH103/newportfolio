@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Durgesh Kumar — Portfolio
 
-## Getting Started
+Personal developer portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All portfolio content lives in `src/data/` — no component edits needed for text/link changes:
 
-## Learn More
+| File | Controls |
+|---|---|
+| `src/data/profile.ts` | Name, role, bio, email, resume path, social links |
+| `src/data/skills.ts` | Skill groups and badges |
+| `src/data/projects.ts` | Project cards |
+| `src/data/experience.ts` | Work experience timeline |
+| `src/data/education.ts` | Education card |
+| `src/data/codingProfiles.ts` | GitHub / LeetCode / GeeksforGeeks / CodeChef links |
+| `src/data/nav.ts` | Navbar links |
 
-To learn more about Next.js, take a look at the following resources:
+### Resume
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Drop your resume PDF at `public/resume.pdf`. The download button reads its path from `profile.resumeUrl` in `src/data/profile.ts`, so changing that one value repoints every "Resume" button on the site.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deployment / SEO
+
+Set `NEXT_PUBLIC_SITE_URL` in your deployment environment (e.g. Vercel project settings) to your production domain — it's used for canonical URLs, `sitemap.xml`, `robots.txt`, and Open Graph metadata.
+
+## Stack
+
+Next.js · React · TypeScript · Tailwind CSS v4 · Framer Motion · lucide-react · react-icons
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+vercel
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for other targets.
