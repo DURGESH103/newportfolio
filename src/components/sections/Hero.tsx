@@ -4,7 +4,6 @@ import { profile, socialLinks } from "@/data/profile";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArchitectureVisual } from "@/components/ui/ArchitectureVisual";
 import { TechBadge } from "@/components/ui/TechBadge";
-import { HeroStats } from "@/components/ui/HeroStats";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
 
 const HIGHLIGHT_PHRASES = ["complex workflows", "reliable"];
@@ -45,20 +44,20 @@ export function Hero() {
 
       <div className="mx-auto grid w-full max-w-[1260px] items-center gap-10 px-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
         <Reveal>
-          <span className="mb-5 inline-flex items-center rounded-full border border-border bg-bg-elevated/60 px-3 py-1 font-mono text-sm text-accent">
+          <span className="mb-4 inline-flex items-center rounded-full border border-border bg-bg-elevated/60 px-3 py-1 font-mono text-[13px] text-accent sm:text-sm">
             Hi, I&apos;m {profile.name.split(" ")[0]}.
           </span>
-          <h1 className="max-w-[700px] text-[36px] font-bold leading-[1.1] tracking-tight text-fg sm:text-[46px] lg:text-[52px] xl:text-[58px]">
+          <h1 className="max-w-[650px] text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-fg sm:text-[38px] lg:text-[44px] xl:text-[48px]">
             <Headline text={profile.headline} />
           </h1>
-          <p className="mt-6 max-w-[680px] text-[16px] leading-[1.6] text-fg-muted sm:text-[17px] lg:text-[18px]">
+          <p className="mt-6 max-w-[620px] text-[15px] leading-[1.55] text-fg-muted sm:text-[16px] lg:text-[17px]">
             {profile.summary}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
-              className="group inline-flex h-12 items-center gap-2 rounded-xl bg-linear-to-r from-accent to-accent-2 px-5 text-[15px] font-semibold text-white shadow-[0_8px_24px_-8px_var(--color-accent)] transition-transform duration-150 hover:-translate-y-0.5"
+              className="group inline-flex h-11 items-center gap-2 rounded-xl bg-linear-to-r from-accent to-accent-2 px-5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_var(--color-accent)] transition-transform duration-150 hover:-translate-y-0.5"
             >
               View Projects
               <ArrowRight
@@ -70,24 +69,24 @@ export function Hero() {
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center gap-2 rounded-xl border border-border bg-bg px-5 text-[15px] font-medium text-fg transition-colors duration-150 hover:border-accent/40"
+              className="inline-flex h-11 items-center gap-2 rounded-xl border border-border bg-bg px-5 text-sm font-medium text-fg transition-colors duration-150 hover:border-accent/40"
             >
               <Download className="h-4 w-4" aria-hidden="true" />
               Download Resume
             </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2.5">
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
             <a
               href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-fg-muted transition-colors duration-150 hover:text-fg"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-fg-muted transition-colors duration-150 hover:text-fg"
             >
-              <GitHubIcon className="h-4 w-4" aria-hidden="true" />
+              <GitHubIcon className="h-3.5 w-3.5" aria-hidden="true" />
               GitHub
             </a>
-            <span className="inline-flex items-center gap-2 text-sm text-fg-subtle">
+            <span className="inline-flex items-center gap-2 text-[13px] text-fg-subtle">
               <span
                 className="h-1.5 w-1.5 rounded-full bg-success/70"
                 aria-hidden="true"
@@ -96,20 +95,16 @@ export function Hero() {
             </span>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 text-sm font-medium text-fg-muted transition-colors duration-150 hover:text-fg"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-fg-muted transition-colors duration-150 hover:text-fg"
             >
               <Send className="h-3.5 w-3.5" aria-hidden="true" />
               Let&apos;s connect
             </a>
           </div>
-
-          <div className="mt-9 max-w-[520px] border-t border-border pt-6">
-            <HeroStats />
-          </div>
         </Reveal>
 
         <Reveal delay={0.15} className="relative mt-2 lg:mt-0">
-          <div className="relative mx-auto w-full max-w-[480px]">
+          <div className="relative mx-auto w-full max-w-[450px]">
             <ArchitectureVisual />
             <TechBadge
               icon={SiPython}

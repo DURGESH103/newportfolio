@@ -15,14 +15,14 @@ export function TechBadge({
   return (
     <div
       className={cn(
-        "motion-safe:animate-float flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-bg-elevated text-fg-muted shadow-lg",
+        "motion-safe:animate-float flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-bg-elevated text-fg-muted shadow-lg",
         className
       )}
       style={{ animationDelay: `${delay}s` }}
       aria-hidden="true"
       title={label}
     >
-      <Icon className="h-[18px] w-[18px]" />
+      <Icon className="h-4 w-4" />
     </div>
   );
 }
