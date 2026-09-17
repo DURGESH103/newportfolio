@@ -25,7 +25,7 @@
   /* Hero background grid line color — kept distinct from --color-border
      so tuning it never affects the .bg-grid used elsewhere (e.g. project
      preview placeholders). */
-  --grid-line: rgba(148, 163, 184, 0.12);
+  --grid-line: rgba(148, 163, 184, 0.2);
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
@@ -47,7 +47,7 @@
   --color-accent-2: #7c3aed;
   --color-accent-2-hover: #6d28d9;
   --color-success: #16a34a;
-  --grid-line: rgba(100, 116, 139, 0.12);
+  --grid-line: rgba(100, 116, 139, 0.2);
 }
 
 @theme inline {
@@ -93,6 +93,12 @@
       transform: translateY(-8px);
     }
   }
+
+  @keyframes hero-flow-dash {
+    to {
+      stroke-dashoffset: -400;
+    }
+  }
 }
 
 html {
@@ -107,6 +113,9 @@ html[data-theme="light"] {
 @media (prefers-reduced-motion: reduce) {
   .animate-float {
     animation: none;
+  }
+  .hero-flow {
+    display: none;
   }
 }
 
