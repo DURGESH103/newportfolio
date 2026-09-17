@@ -121,7 +121,8 @@ body {
   background-image:
     linear-gradient(to right, var(--color-border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 50px 50px;
+  opacity: 0.14;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 
