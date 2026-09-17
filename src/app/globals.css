@@ -93,6 +93,24 @@
       transform: translateY(-8px);
     }
   }
+
+  @keyframes hero-flow-dash {
+    to {
+      stroke-dashoffset: -500;
+    }
+  }
+
+  @keyframes hero-particle-pulse {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(1.15);
+    }
+  }
 }
 
 html {
@@ -108,6 +126,20 @@ html[data-theme="light"] {
   .animate-float {
     animation: none;
   }
+  /* Keep the decorative flow lines visible but static; drop the particles
+     entirely rather than show them frozen mid-path. !important is needed
+     because the animation is set via inline style (varies per line). */
+  .hero-flow-line {
+    animation: none !important;
+  }
+  .hero-flow-particle {
+    display: none;
+  }
+}
+
+.hero-flow-particle {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 body {

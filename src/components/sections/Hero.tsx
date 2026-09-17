@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ArchitectureVisual } from "@/components/ui/ArchitectureVisual";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
+import { cn } from "@/lib/utils";
 
 const HIGHLIGHT_PHRASES = ["complex workflows", "reliable"];
 const highlightPattern = new RegExp(
@@ -13,6 +14,26 @@ const highlightPattern = new RegExp(
   )})`,
   "gi"
 );
+
+// Flow lines stay clear of the left/center text column — concentrated
+// upper-right, right (behind the architecture card), and lower area.
+const FLOW_PATHS = [
+  "M 750 120 C 950 60, 1150 180, 1550 100",
+  "M 700 380 C 900 340, 1150 460, 1550 380",
+  "M 900 700 C 1100 660, 1300 760, 1550 680",
+];
+
+// Small fixed dots that softly pulse in place. Positioned with plain
+// percentage offsets (not SVG viewBox coordinates) so placement stays
+// predictable regardless of the hero's actual rendered aspect ratio —
+// all safely right-of-center or below the text/button/links column.
+const FLOW_DOTS = [
+  { className: "right-[30%] top-[8%]", tier: "base" },
+  { className: "right-[4%] top-[14%]", tier: "base" },
+  { className: "right-[12%] bottom-[10%]", tier: "sm" },
+  { className: "right-[46%] bottom-[4%]", tier: "lg" },
+  { className: "right-[1%] top-[42%]", tier: "lg" },
+] as const;
 
 function HeroBackground() {
   return (
@@ -26,6 +47,86 @@ function HeroBackground() {
         className="pointer-events-none absolute bottom-[-10%] right-[8%] -z-10 h-[320px] w-[320px] rounded-full bg-accent-2/10 blur-[100px]"
         aria-hidden="true"
       />
+
+      {/* Subtle flowing data lines + glowing particles, behind all content */}
+      <svg
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+        viewBox="0 0 1600 800"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="hero-flow-gradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--color-accent)" stopOpacity="1" />
+            <stop offset="100%" stopColor="var(--color-accent-2)" stopOpacity="0" />
+          </linearGradient>
+          <filter id="hero-particle-glow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {FLOW_PATHS.map((d, index) => (
+          <path
+            key={d}
+            id={`hero-flow-path-${index}`}
+            d={d}
+            fill="none"
+            stroke="url(#hero-flow-gradient)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeDasharray="8 18"
+            opacity={0.14}
+            className={
+              index > 0
+                ? `hero-flow-line ${index === 1 ? "hidden sm:block" : "hidden lg:block"}`
+                : "hero-flow-line"
+            }
+            style={{ animation: `hero-flow-dash ${28 + index * 6}s linear infinite` }}
+          />
+        ))}
+
+        {FLOW_PATHS.map((d, index) => (
+          <circle
+            key={`travel-${d}`}
+            r="3"
+            fill="var(--color-accent-2)"
+            fillOpacity={0.35}
+            filter="url(#hero-particle-glow)"
+            className={
+              index > 0
+                ? `hero-flow-particle ${index === 1 ? "hidden sm:block" : "hidden lg:block"}`
+                : "hero-flow-particle"
+            }
+          >
+            <animateMotion dur={`${20 + index * 6}s`} repeatCount="indefinite">
+              <mpath href={`#hero-flow-path-${index}`} />
+            </animateMotion>
+          </circle>
+        ))}
+
+      </svg>
+
+      {FLOW_DOTS.map((dot, index) => (
+        <span
+          key={dot.className}
+          className={cn(
+            "hero-flow-particle absolute h-[5px] w-[5px] rounded-full bg-accent shadow-[0_0_8px_1px_var(--color-accent)]",
+            dot.className,
+            dot.tier === "sm" && "hidden sm:block",
+            dot.tier === "lg" && "hidden lg:block"
+          )}
+          style={{
+            animation: `hero-particle-pulse ${5 + index}s ease-in-out infinite`,
+            animationDelay: `${index * 0.7}s`,
+          }}
+          aria-hidden="true"
+        />
+      ))}
     </>
   );
 }
