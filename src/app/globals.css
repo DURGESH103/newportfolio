@@ -22,6 +22,10 @@
   --color-accent-2: #8b5cf6;
   --color-accent-2-hover: #a17bf7;
   --color-success: #22c55e;
+  /* Hero background grid line color — kept distinct from --color-border
+     so tuning it never affects the .bg-grid used elsewhere (e.g. project
+     preview placeholders). */
+  --grid-line: rgba(148, 163, 184, 0.12);
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
@@ -43,6 +47,7 @@
   --color-accent-2: #7c3aed;
   --color-accent-2-hover: #6d28d9;
   --color-success: #16a34a;
+  --grid-line: rgba(100, 116, 139, 0.12);
 }
 
 @theme inline {
@@ -116,13 +121,21 @@ body {
   color: var(--color-accent-fg);
 }
 
-/* Subtle grid background used behind the hero section */
+/* Subtle grid pattern used inside project preview placeholders */
 .bg-grid {
   background-image:
     linear-gradient(to right, var(--color-border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.14;
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Engineering-blueprint grid background behind the hero section */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 

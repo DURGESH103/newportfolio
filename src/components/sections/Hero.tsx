@@ -40,7 +40,7 @@ export function Hero() {
       id="home"
       className="relative overflow-hidden pb-14 pt-28 sm:pb-16 sm:pt-32"
     >
-      <div className="absolute inset-0 -z-10 bg-grid" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 hero-grid" aria-hidden="true" />
 
       <div className="mx-auto grid w-full max-w-[1260px] items-center gap-10 px-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
         <Reveal>
