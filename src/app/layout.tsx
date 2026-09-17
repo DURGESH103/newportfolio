@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
@@ -64,12 +63,24 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitScript = `
+  try {
+    var stored = localStorage.getItem("theme");
+    var theme = stored === "light" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", theme);
+  } catch (e) {}
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
@@ -77,7 +88,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <ScrollProgress />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}

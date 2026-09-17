@@ -3,6 +3,8 @@ export const profile = {
   initials: "DK",
   role: "Backend Software Engineer | Full-Stack Developer",
   shortRole: "Backend Software Engineer",
+  /** Short caption shown under the name in the navbar brand mark. */
+  navRole: "Backend Developer",
   tagline:
     "Backend Software Engineer building reliable, scalable and user-focused software.",
   headline: "I build backend systems that turn complex workflows into reliable products.",

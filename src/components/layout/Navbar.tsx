@@ -2,17 +2,75 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { navItems } from "@/data/nav";
 import { profile, socialLinks } from "@/data/profile";
-import { Button } from "@/components/ui/Button";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
+import { useTheme } from "@/lib/useTheme";
 import { cn } from "@/lib/utils";
+
+function Logo() {
+  return (
+    <Link href="#home" className="flex items-center gap-2.5">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-accent to-accent-2 text-sm font-bold text-white shadow-[0_0_18px_-6px_var(--color-accent)]">
+        {profile.initials}
+      </span>
+      <span className="flex flex-col leading-none">
+        <span className="text-[15px] font-semibold tracking-tight text-fg">
+          {profile.name}
+        </span>
+        <span className="mt-1 text-[11px] text-fg-subtle">
+          {profile.navRole}
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+function ResumeLink({ className }: { className?: string }) {
+  return (
+    <a
+      href={profile.resumeUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "inline-flex items-center justify-center gap-1.5 rounded-full bg-linear-to-r from-accent to-accent-2 px-4 py-2 text-sm font-medium text-white shadow-[0_0_20px_-6px_var(--color-accent)] transition-transform duration-150 hover:-translate-y-0.5 hover:scale-[1.02]",
+        className
+      )}
+    >
+      <Download className="h-3.5 w-3.5" aria-hidden="true" />
+      Resume
+    </a>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const isLight = theme === "light";
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+      aria-pressed={isLight}
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-fg-muted transition-colors duration-150 hover:border-accent/40 hover:text-accent"
+    >
+      {isLight ? (
+        <Moon className="h-4 w-4" aria-hidden="true" />
+      ) : (
+        <Sun className="h-4 w-4" aria-hidden="true" />
+      )}
+    </button>
+  );
+}
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     function onScroll() {
@@ -51,141 +109,145 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-colors duration-200",
-        scrolled
-          ? "border-b border-border bg-bg/85 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      )}
-    >
-      <nav
-        aria-label="Primary"
-        className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6"
-      >
-        <Link
-          href="#home"
-          className="font-mono text-base font-semibold tracking-tight text-fg"
-        >
-          {profile.name}
-        </Link>
-
-        <ul className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
-                  activeHref === item.href
-                    ? "text-accent"
-                    : "text-fg-muted hover:text-fg"
-                )}
-                aria-current={activeHref === item.href ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden items-center gap-3 md:flex">
-          <a
-            href={socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub profile"
-            className="text-fg-muted transition-colors duration-150 hover:text-fg"
-          >
-            <GitHubIcon className="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a
-            href={socialLinks.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn profile"
-            className="text-fg-muted transition-colors duration-150 hover:text-fg"
-          >
-            <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
-          </a>
-          <Button
-            href={profile.resumeUrl}
-            variant="secondary"
-            external
-            className="ml-1"
-          >
-            Resume
-          </Button>
-        </div>
-
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-fg md:hidden"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((prev) => !prev)}
-        >
-          {mobileOpen ? (
-            <X className="h-6 w-6" aria-hidden="true" />
-          ) : (
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          )}
-        </button>
-      </nav>
-
-      <div
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4 sm:pt-5">
+      <header
         className={cn(
-          "overflow-hidden border-b border-border bg-bg transition-[max-height] duration-300 ease-in-out md:hidden",
-          mobileOpen ? "max-h-[28rem]" : "max-h-0 border-b-0"
+          "pointer-events-auto w-full max-w-[1400px] rounded-[20px] border transition-all duration-300",
+          scrolled
+            ? "border-border bg-bg/75 shadow-[0_8px_30px_-18px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+            : "border-border/50 bg-bg/30 backdrop-blur-md"
         )}
       >
-        <ul className="flex flex-col px-6 py-4">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "block rounded-md px-2 py-3 text-base font-medium transition-colors duration-150",
-                  activeHref === item.href
-                    ? "text-accent"
-                    : "text-fg-muted hover:text-fg"
-                )}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-4 border-t border-border px-6 py-4">
-          <a
-            href={socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub profile"
-            className="text-fg-muted hover:text-fg"
+        <nav
+          aria-label="Primary"
+          className="flex h-[72px] items-center justify-between gap-4 px-5 sm:px-7"
+        >
+          <Logo />
+
+          <div className="hidden items-center rounded-full border border-border/60 bg-bg-elevated/40 p-1.5 xl:flex">
+            <ul className="relative flex items-center gap-1">
+              {navItems.map((item) => {
+                const isActive = activeHref === item.href;
+                return (
+                  <li key={item.href} className="relative">
+                    {isActive ? (
+                      <motion.span
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 rounded-full bg-linear-to-r from-accent to-accent-2 shadow-[0_0_16px_-4px_var(--color-accent)]"
+                        transition={
+                          shouldReduceMotion
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 380, damping: 32 }
+                        }
+                      />
+                    ) : null}
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "relative z-10 block rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150",
+                        isActive
+                          ? "text-white"
+                          : "text-fg-muted hover:text-fg"
+                      )}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div className="hidden items-center gap-3 xl:flex">
+            <a
+              href={socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="text-fg-muted transition-colors duration-150 hover:text-accent"
+            >
+              <GitHubIcon className="h-[18px] w-[18px]" aria-hidden="true" />
+            </a>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-fg-muted transition-colors duration-150 hover:text-accent"
+            >
+              <LinkedInIcon className="h-[18px] w-[18px]" aria-hidden="true" />
+            </a>
+            <ThemeToggle />
+            <ResumeLink className="ml-1" />
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-full p-2 text-fg xl:hidden"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
           >
-            <GitHubIcon className="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a
-            href={socialLinks.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn profile"
-            className="text-fg-muted hover:text-fg"
-          >
-            <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
-          </a>
-          <Button
-            href={profile.resumeUrl}
-            variant="secondary"
-            external
-            className="ml-auto"
-          >
-            Resume
-          </Button>
+            {mobileOpen ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
+          </button>
+        </nav>
+
+        <div
+          className={cn(
+            "overflow-hidden transition-[max-height] duration-300 ease-in-out xl:hidden",
+            mobileOpen ? "max-h-[32rem] border-t border-border" : "max-h-0"
+          )}
+        >
+          <ul className="flex flex-col px-5 py-3">
+            {navItems.map((item) => {
+              const isActive = activeHref === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "block rounded-lg px-3 py-3 text-base font-medium transition-colors duration-150",
+                      isActive
+                        ? "bg-linear-to-r from-accent to-accent-2 text-white"
+                        : "text-fg-muted hover:text-fg"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="flex items-center gap-4 border-t border-border px-5 py-4">
+            <a
+              href={socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="text-fg-muted hover:text-accent"
+            >
+              <GitHubIcon className="h-5 w-5" aria-hidden="true" />
+            </a>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-fg-muted hover:text-accent"
+            >
+              <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
+            </a>
+            <ThemeToggle />
+            <ResumeLink className="ml-auto" />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
