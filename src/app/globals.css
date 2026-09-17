@@ -93,12 +93,6 @@
       transform: translateY(-8px);
     }
   }
-
-  @keyframes hero-flow-dash {
-    to {
-      stroke-dashoffset: -400;
-    }
-  }
 }
 
 html {
@@ -113,9 +107,6 @@ html[data-theme="light"] {
 @media (prefers-reduced-motion: reduce) {
   .animate-float {
     animation: none;
-  }
-  .hero-flow {
-    display: none;
   }
 }
 

@@ -14,12 +14,6 @@ const highlightPattern = new RegExp(
   "gi"
 );
 
-const FLOW_PATHS = [
-  "M 420 180 C 550 140, 700 260, 1000 200",
-  "M 400 320 C 580 280, 750 400, 1000 340",
-  "M 450 480 C 620 440, 800 540, 1000 470",
-];
-
 function HeroBackground() {
   return (
     <>
@@ -32,55 +26,6 @@ function HeroBackground() {
         className="pointer-events-none absolute bottom-[-10%] right-[8%] -z-10 h-[320px] w-[320px] rounded-full bg-accent-2/10 blur-[100px]"
         aria-hidden="true"
       />
-
-      {/* Subtle data-flow lines + particles, concentrated right/lower area */}
-      <svg
-        className="hero-flow pointer-events-none absolute inset-0 -z-10 h-full w-full"
-        viewBox="0 0 1000 600"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="hero-flow-gradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0" />
-            <stop offset="50%" stopColor="var(--color-accent)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="var(--color-accent-2)" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        {FLOW_PATHS.map((d, index) => (
-          <path
-            key={d}
-            id={`hero-flow-path-${index}`}
-            d={d}
-            fill="none"
-            stroke="url(#hero-flow-gradient)"
-            strokeWidth="1"
-            strokeDasharray="6 14"
-            opacity={0.35}
-            className={index > 0 ? "hidden sm:block" : undefined}
-            style={{
-              animation: `hero-flow-dash ${16 + index * 4}s linear infinite`,
-            }}
-          />
-        ))}
-
-        {FLOW_PATHS.map((d, index) => (
-          <circle
-            key={`particle-${d}`}
-            r="2.5"
-            fill="var(--color-accent-2)"
-            opacity={0.7}
-            className={index > 0 ? "hidden lg:block" : undefined}
-          >
-            <animateMotion
-              dur={`${12 + index * 4}s`}
-              repeatCount="indefinite"
-              path={d}
-            />
-          </circle>
-        ))}
-      </svg>
     </>
   );
 }
