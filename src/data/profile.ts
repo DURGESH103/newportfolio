@@ -15,13 +15,6 @@ export const profile = {
     "I'm also curious about the data and cloud side of engineering — building pipelines with Azure Data Factory and Apache Spark, and working through analytics workflows in Snowflake and Power BI. Understanding how data moves through a system, not just how an API responds, shapes how I design backends.",
     "I'm completing my B.Tech in Computer Science Engineering and looking for a software engineering role where I can keep building real systems with a team that cares about doing it properly.",
   ],
-  focusAreas: [
-    "Backend Engineering",
-    "REST APIs",
-    "Real-time Systems",
-    "Databases",
-    "Cloud & Data",
-  ],
   location: "India",
   email: "durgesh.kumar@indiahealthlink.com",
   resumeUrl: "/resume.pdf",
