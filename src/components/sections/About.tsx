@@ -106,35 +106,36 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.15} className="lg:col-span-5">
-            <div className="relative mx-auto w-full max-w-[380px]">
+            <div className="relative mx-auto w-full max-w-[430px]">
               <div
-                className="pointer-events-none absolute -inset-6 -z-10 rounded-[40px] bg-linear-to-br from-accent/20 via-accent-2/10 to-transparent blur-2xl"
+                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-linear-to-br from-accent/25 via-accent-2/15 to-transparent blur-[70px]"
                 aria-hidden="true"
               />
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] border border-border shadow-2xl shadow-black/40">
+              <div
+                className="pointer-events-none absolute -inset-8 -z-10 rounded-full border border-accent/15"
+                aria-hidden="true"
+              />
+
+              <div className="relative aspect-[4/5] w-full">
                 <Image
                   src="/profile.png"
                   alt={`Portrait of ${profile.name}`}
                   fill
-                  sizes="(min-width: 1024px) 380px, 70vw"
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 430px, 80vw"
+                  className="portrait-cutout object-cover"
                   priority
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/30 via-transparent to-transparent"
-                  aria-hidden="true"
                 />
               </div>
 
               <div
-                className="motion-safe:animate-float absolute -left-4 top-8 hidden items-center gap-1.5 rounded-full border border-border bg-bg-elevated/90 px-3 py-1.5 text-xs font-medium text-fg shadow-lg backdrop-blur-md lg:flex"
+                className="motion-safe:animate-float absolute left-0 top-6 hidden items-center gap-1.5 rounded-full border border-border bg-bg-elevated/90 px-3 py-1.5 text-xs font-medium text-fg shadow-lg backdrop-blur-md lg:flex"
                 style={{ animationDelay: "0.3s" }}
               >
                 <Server className="h-3 w-3 text-accent" aria-hidden="true" />
                 Backend Developer
               </div>
               <div
-                className="motion-safe:animate-float absolute -right-4 bottom-10 hidden items-center gap-1.5 rounded-full border border-border bg-bg-elevated/90 px-3 py-1.5 text-xs font-medium text-fg shadow-lg backdrop-blur-md lg:flex"
+                className="motion-safe:animate-float absolute right-0 bottom-14 hidden items-center gap-1.5 rounded-full border border-border bg-bg-elevated/90 px-3 py-1.5 text-xs font-medium text-fg shadow-lg backdrop-blur-md lg:flex"
                 style={{ animationDelay: "0.9s" }}
               >
                 <Layers className="h-3 w-3 text-accent-2" aria-hidden="true" />
