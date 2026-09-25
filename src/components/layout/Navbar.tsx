@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 function Logo() {
   return (
     <Link href="#home" className="flex items-center gap-2.5">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-accent to-accent-2 text-sm font-bold text-white shadow-[0_0_18px_-6px_var(--color-accent)]">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-accent to-accent-2 text-[13px] font-bold text-white shadow-[0_0_18px_-6px_var(--color-accent)]">
         {profile.initials}
       </span>
       <span className="flex flex-col leading-none">
@@ -70,11 +70,20 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 8);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 8);
+
+      const scrolledDown = currentY > lastScrollY.current;
+      const pastRevealThreshold = currentY > 96; // clear of the hero's top
+      setHidden(scrolledDown && pastRevealThreshold);
+
+      lastScrollY.current = currentY;
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -109,10 +118,15 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4 sm:pt-5">
+    <div
+      className={cn(
+        "pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-3 transition-transform duration-300 ease-in-out sm:pt-4",
+        hidden && !mobileOpen ? "-translate-y-[calc(100%+2rem)]" : "translate-y-0"
+      )}
+    >
       <header
         className={cn(
-          "pointer-events-auto w-full max-w-[1400px] rounded-[20px] border transition-all duration-300",
+          "pointer-events-auto w-full max-w-[1400px] rounded-[18px] border transition-all duration-300",
           scrolled
             ? "border-border bg-bg/75 shadow-[0_8px_30px_-18px_rgba(0,0,0,0.6)] backdrop-blur-xl"
             : "border-border/50 bg-bg/30 backdrop-blur-md"
@@ -120,11 +134,11 @@ export function Navbar() {
       >
         <nav
           aria-label="Primary"
-          className="flex h-[72px] items-center justify-between gap-4 px-5 sm:px-7"
+          className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6"
         >
           <Logo />
 
-          <div className="hidden items-center rounded-full border border-border/60 bg-bg-elevated/40 p-1.5 xl:flex">
+          <div className="hidden items-center rounded-full border border-border/60 bg-bg-elevated/40 p-1 xl:flex">
             <ul className="relative flex items-center gap-1">
               {navItems.map((item) => {
                 const isActive = activeHref === item.href;
@@ -144,7 +158,7 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "relative z-10 block rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150",
+                        "relative z-10 block rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-150",
                         isActive
                           ? "text-white"
                           : "text-fg-muted hover:text-fg"
