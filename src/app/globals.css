@@ -149,31 +149,6 @@ body {
   mask-image: radial-gradient(ellipse 70% 55% at 50% 35%, #000 30%, transparent 100%);
 }
 
-/* Soft-edge vignette mask for the About section portrait — fades the
-   photo's edges into the page background instead of a hard box crop. */
-.portrait-cutout {
-  -webkit-mask-image: radial-gradient(
-    ellipse 48% 62% at 50% 32%,
-    #000 42%,
-    rgba(0, 0, 0, 0.9) 55%,
-    rgba(0, 0, 0, 0.5) 72%,
-    rgba(0, 0, 0, 0.15) 88%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 48% 62% at 50% 32%,
-    #000 42%,
-    rgba(0, 0, 0, 0.9) 55%,
-    rgba(0, 0, 0, 0.5) 72%,
-    rgba(0, 0, 0, 0.15) 88%,
-    transparent 100%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
