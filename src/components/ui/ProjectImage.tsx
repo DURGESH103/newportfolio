@@ -49,6 +49,10 @@ export function ProjectImage({
             className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/55 via-transparent to-transparent"
             aria-hidden="true"
           />
+          <div
+            className="pointer-events-none absolute inset-0 bg-accent/0 transition-colors duration-300 group-hover:bg-accent/5"
+            aria-hidden="true"
+          />
         </div>
       );
     }
