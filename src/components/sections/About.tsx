@@ -52,7 +52,7 @@ function FloatingBadge({
   return (
     <div
       className={cn(
-        "motion-safe:animate-float absolute hidden items-center gap-2.5 rounded-2xl border border-border bg-bg-elevated/95 py-2.5 pl-2.5 pr-4 shadow-xl backdrop-blur-md lg:flex",
+        "motion-safe:animate-float absolute hidden items-center gap-2.5 rounded-2xl border border-border bg-bg-elevated/95 py-2.5 pl-2.5 pr-4 shadow-xl backdrop-blur-md xl:flex",
         className
       )}
       style={{ animationDelay: `${delay}s` }}
@@ -68,6 +68,21 @@ function FloatingBadge({
         )}
         aria-hidden="true"
       />
+    </div>
+  );
+}
+
+function CompactRoleBadges() {
+  return (
+    <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 xl:hidden">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg-elevated/80 px-3 py-1.5 text-xs font-medium text-fg">
+        <Code2 className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+        Backend Developer
+      </span>
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg-elevated/80 px-3 py-1.5 text-xs font-medium text-fg">
+        <Layers className="h-3.5 w-3.5 text-accent-2" aria-hidden="true" />
+        Full-Stack Developer
+      </span>
     </div>
   );
 }
@@ -144,7 +159,7 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.15} className="lg:col-span-5">
-            <div className="relative mx-auto w-full max-w-[400px] lg:mx-0 lg:ml-auto lg:mr-8">
+            <div className="relative mx-auto w-full max-w-[400px] xl:mx-0 xl:ml-auto xl:mr-8">
               <div
                 className="pointer-events-none absolute inset-0 -z-20 scale-110 rounded-[50%] bg-accent/20 blur-[90px]"
                 aria-hidden="true"
@@ -160,7 +175,7 @@ export function About() {
                     src="/profile.png"
                     alt={`Portrait of ${profile.name}`}
                     fill
-                    sizes="(min-width: 1024px) 400px, 75vw"
+                    sizes="(min-width: 1280px) 400px, (min-width: 640px) 60vw, 80vw"
                     className="object-cover"
                     priority
                   />
@@ -173,7 +188,7 @@ export function About() {
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                className="pointer-events-none absolute -top-7 left-8 hidden h-7 w-7 text-accent/70 lg:block"
+                className="pointer-events-none absolute -top-7 left-8 hidden h-7 w-7 text-accent/70 xl:block"
                 aria-hidden="true"
               >
                 <path d="M4 15 L9 10" />
@@ -182,7 +197,7 @@ export function About() {
               </svg>
 
               <div
-                className="pointer-events-none absolute -right-20 top-0 hidden w-[170px] lg:block"
+                className="pointer-events-none absolute -right-20 top-0 hidden w-[170px] xl:block"
                 aria-hidden="true"
               >
                 <p
@@ -227,13 +242,15 @@ export function About() {
               />
 
               <div
-                className="pointer-events-none absolute -left-6 top-1/2 hidden h-2 w-2 rounded-full bg-accent/50 lg:block"
+                className="pointer-events-none absolute -left-6 top-1/2 hidden h-2 w-2 rounded-full bg-accent/50 xl:block"
                 aria-hidden="true"
               />
               <div
-                className="pointer-events-none absolute -bottom-4 right-1/4 hidden h-12 w-12 rounded-full border border-accent/20 lg:block"
+                className="pointer-events-none absolute -bottom-4 right-1/4 hidden h-12 w-12 rounded-full border border-accent/20 xl:block"
                 aria-hidden="true"
               />
+
+              <CompactRoleBadges />
             </div>
           </Reveal>
         </div>
