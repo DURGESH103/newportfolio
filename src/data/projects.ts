@@ -38,6 +38,14 @@ export const projects: Project[] = [
       "REST API for poll and room management",
       "MongoDB-backed persistence",
     ],
+    image: "/projects/real-time-polling-platform-1-home.png",
+    images: [
+      "/projects/real-time-polling-platform-1-home.png",
+      "/projects/real-time-polling-platform-2-features.png",
+      "/projects/real-time-polling-platform-3-login.png",
+      "/projects/real-time-polling-platform-4-create-poll.png",
+      "/projects/real-time-polling-platform-5-dashboard.png",
+    ],
     liveUrl: "https://real-time-poll-rooms-beta.vercel.app/",
     featured: true,
   },
@@ -47,6 +55,13 @@ export const projects: Project[] = [
     description:
       "A restaurant booking platform for discovering restaurants and reserving a table without back-and-forth.",
     tech: ["React", "Next.js", "Backend APIs", "Database"],
+    image: "/projects/restobook.png",
+    images: [
+      "/projects/restobook-1-home.png",
+      "/projects/restobook-2-about.png",
+      "/projects/restobook-3-experience.png",
+      "/projects/restobook-4-testimonials.png",
+    ],
     liveUrl: "https://restobook.vercel.app/",
   },
   {
@@ -55,6 +70,13 @@ export const projects: Project[] = [
     description:
       "A simple web app for generating QR codes instantly from user-provided information.",
     tech: ["React.js", "JavaScript"],
+    image: "/projects/qr-generator.png",
+    images: [
+      "/projects/qr-generator-1-home.png",
+      "/projects/qr-generator-2-features.png",
+      "/projects/qr-generator-3-generator.png",
+      "/projects/qr-generator-4-dark-theme.png",
+    ],
     liveUrl: "https://qr-genrator-iota.vercel.app/",
   },
   {
@@ -63,6 +85,7 @@ export const projects: Project[] = [
     description:
       "A document generation app that turns structured input into ready-to-use documents.",
     tech: ["Python", "JavaScript", "Full Stack"],
+    image: "/projects/smartdoc-generator.png",
   },
   {
     slug: "ai-image-colorization",
@@ -70,6 +93,7 @@ export const projects: Project[] = [
     description:
       "An AI-based tool that converts grayscale images into colorized images using a deep learning model.",
     tech: ["Python", "PyTorch", "Flask", "DeOldify"],
+    image: "/projects/ai-image-colorization.png",
   },
 ];
 
