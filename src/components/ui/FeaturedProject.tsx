@@ -1,4 +1,5 @@
-import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -7,7 +8,13 @@ import { GitHubIcon } from "@/components/ui/BrandIcons";
 
 export function FeaturedProject({ project }: { project: Project }) {
   return (
-    <article className="overflow-hidden rounded-2xl border border-border bg-bg-elevated">
+    <article className="group relative overflow-hidden rounded-2xl border border-border bg-bg-elevated transition-colors duration-200 hover:border-accent/40">
+      <Link
+        href={`/projects/${project.slug}`}
+        aria-label={`View project: ${project.name}`}
+        className="absolute inset-0 z-10"
+      />
+
       <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10">
         <ProjectImage
           image={project.image}
@@ -56,7 +63,7 @@ export function FeaturedProject({ project }: { project: Project }) {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="relative z-20 mt-8 flex flex-wrap items-center gap-3">
             {project.liveUrl ? (
               <Button href={project.liveUrl} external>
                 Live Demo
@@ -69,6 +76,14 @@ export function FeaturedProject({ project }: { project: Project }) {
                 GitHub
               </Button>
             ) : null}
+          </div>
+
+          <div className="mt-6 flex items-center gap-1.5 text-sm font-medium text-fg-muted transition-colors duration-200 group-hover:text-accent">
+            View full case study
+            <ArrowUpRight
+              className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </div>

@@ -4,11 +4,18 @@ export type Project = {
   description: string;
   problem?: string;
   solution?: string;
+  architecture?: string;
+  challenges?: string;
+  outcome?: string;
   tech: string[];
   features?: string[];
   /** Path under /public. Omit if no real screenshot exists yet — a
    * placeholder is rendered instead. Never fabricate a fake screenshot. */
   image?: string;
+  /** Full screenshot set for the project-details gallery. Omit if none
+   * exist yet; falls back to `image`, or a "coming soon" state if that's
+   * also absent. Never fabricate fake screenshots. */
+  images?: string[];
   githubUrl?: string;
   liveUrl?: string;
   featured?: boolean;
@@ -68,3 +75,7 @@ export const projects: Project[] = [
 
 export const featuredProject = projects.find((p) => p.featured);
 export const otherProjects = projects.filter((p) => !p.featured);
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
