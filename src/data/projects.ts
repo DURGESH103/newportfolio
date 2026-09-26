@@ -95,6 +95,96 @@ export const projects: Project[] = [
     tech: ["Python", "PyTorch", "Flask", "DeOldify"],
     image: "/projects/ai-image-colorization.png",
   },
+  {
+    slug: "railwaygo",
+    name: "RailwayGo",
+    description:
+      "A railway information platform for checking train schedules, live running status, PNR status, station details, and seat availability.",
+    tech: ["Node.js", "Express", "REST APIs"],
+    features: [
+      "Train schedules between stations",
+      "Live train running status",
+      "PNR status checking with passenger details",
+      "Station details and information",
+      "Seat availability checking across classes",
+      "Caching, rate limiting, and request logging",
+    ],
+    image: "/projects/railwaygo-1-home.png",
+    images: [
+      "/projects/railwaygo-1-home.png",
+      "/projects/railwaygo-2-schedules.png",
+      "/projects/railwaygo-3-live-status.png",
+      "/projects/railwaygo-4-pnr-status.png",
+      "/projects/railwaygo-5-stations.png",
+      "/projects/railwaygo-6-seats.png",
+    ],
+  },
+  {
+    slug: "word-editor",
+    name: "WordEditor",
+    description:
+      "A browser-based text editor with formatting tools, find & replace, PDF/text export, read-aloud, and real-time text analytics.",
+    tech: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+    features: [
+      "Text transforms: UPPERCASE, lowercase, Capitalize, Reverse (chars/words)",
+      "Undo/redo, find & replace, and adjustable font size",
+      "Export to PDF or .txt, plus copy and read-aloud text-to-speech",
+      "Real-time word, character, sentence, and paragraph counts",
+      "Reading time, average word length, and readability score",
+      "Word frequency and top keyword density breakdown",
+    ],
+    image: "/projects/word-editor-1-editor.png",
+    images: [
+      "/projects/word-editor-1-editor.png",
+      "/projects/word-editor-2-stats.png",
+      "/projects/word-editor-3-word-frequency.png",
+    ],
+  },
+  {
+    slug: "ai-recruit",
+    name: "AI Recruit",
+    description:
+      "An AI-powered recruitment platform with resume analysis, candidate-job matching, mock interviews, and role-based dashboards for candidates and recruiters.",
+    tech: ["React", "Tailwind CSS", "Framer Motion", "Recharts"],
+    features: [
+      "AI-powered resume parsing and skill extraction",
+      "Candidate-to-company and job matching",
+      "Automated coding rounds and AI mock interviews",
+      "Role-based dashboards for candidates and recruiters",
+      "Interactive analytics with skills and match-distribution charts",
+      "Hackathon portal for competitions and internships",
+    ],
+    image: "/projects/ai-recruit-1-home.png",
+    images: [
+      "/projects/ai-recruit-1-home.png",
+      "/projects/ai-recruit-2-features.png",
+      "/projects/ai-recruit-3-sign-in.png",
+      "/projects/ai-recruit-4-hackathons.png",
+    ],
+  },
+  {
+    slug: "portfolio",
+    name: "Portfolio",
+    description:
+      "A personal developer portfolio with a premium dark and gold aesthetic, featuring a blog, certifications, client authentication, and a project inquiry system.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    features: [
+      "Animated hero section with profile photo and role headline",
+      "\"What I Do\" services and \"My Process\" workflow sections",
+      "Interactive skill cards with animated proficiency indicators",
+      "Dedicated Certifications and Blog sections",
+      "User authentication with login and registration",
+      "Contact form with project type and budget selection",
+    ],
+    image: "/projects/portfolio-1-home.png",
+    images: [
+      "/projects/portfolio-1-home.png",
+      "/projects/portfolio-2-what-i-do.png",
+      "/projects/portfolio-3-process.png",
+      "/projects/portfolio-4-expertise.png",
+      "/projects/portfolio-5-contact.png",
+    ],
+  },
 ];
 
 export const featuredProject = projects.find((p) => p.featured);
